@@ -1,6 +1,6 @@
 # flutter_overboard
 
-Onboarding widget for flutter to create beautiful onboarding slides w minimal code.
+Onboarding widget for flutter to create beautiful onboarding slides with minimal code.
 
 
 ## Demo   

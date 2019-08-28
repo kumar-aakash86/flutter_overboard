@@ -1,4 +1,3 @@
-
 import 'dart:ui';
 
 class PageModel {
@@ -7,10 +6,5 @@ class PageModel {
   final String title;
   final String body;
 
-  PageModel(
-    this.color,
-    this.imageAssetPath,
-    this.title,
-    this.body
-  );
+  PageModel(this.color, this.imageAssetPath, this.title, this.body);
 }

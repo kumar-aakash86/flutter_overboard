@@ -3,10 +3,8 @@
 Onboarding widget for flutter to create beautiful onboarding slides w minimal code.
 
 
-## Demo
-![Screenshot 1](https://github.com/kumar-aakash86/flutter_overboard/blob/master/screenshots/01.jpg | width=200)  
-![Screenshot 2](https://github.com/kumar-aakash86/flutter_overboard/blob/master/screenshots/02.jpg | width=200)  
-![Screenshot 3](https://github.com/kumar-aakash86/flutter_overboard/blob/master/screenshots/03.jpg | width=200)  
+## Demo    
+<img src="https://github.com/kumar-aakash86/flutter_overboard/blob/master/screenshots/01.jpg" width="300" >
 
 
 ## Usage

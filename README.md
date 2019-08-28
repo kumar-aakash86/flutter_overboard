@@ -3,10 +3,8 @@
 Onboarding widget for flutter to create beautiful onboarding slides w minimal code.
 
 
-## Demo    
-<img src="https://github.com/kumar-aakash86/flutter_overboard/blob/master/screenshots/01.jpg" width="300" >
-<img src="https://github.com/kumar-aakash86/flutter_overboard/blob/master/screenshots/02.jpg" width="300" >
-<img src="https://github.com/kumar-aakash86/flutter_overboard/blob/master/screenshots/03.jpg" width="300" >
+## Demo   
+ ![Example Gif](https://github.com/kumar-aakash86/flutter_overboard/blob/master/screenshots/example.gif)
 
 
 ## Usage
@@ -63,6 +61,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),

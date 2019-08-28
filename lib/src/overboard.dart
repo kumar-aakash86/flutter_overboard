@@ -87,7 +87,13 @@ class _OverBoardState extends State<OverBoard> with TickerProviderStateMixin {
                     padding: const EdgeInsets.all(20.0),
                     textColor: Colors.white,
                     child: Text("SKIP"),
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        _last = _counter;
+                        _counter = _total-1;
+                      });
+                      _controller.forward(from: 0);
+                    },
                   )
                 : null,
           ),

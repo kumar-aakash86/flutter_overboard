@@ -1,8 +1,8 @@
 name: flutter_overboard
 description: A new Flutter package project.
 version: 1.0.0
-author:
-homepage:
+author: Aakash Kumar <kumar_aakash86@yahoo.in>
+homepage: https://github.com/kumar-aakash86/flutter_overboard
 
 environment:
   sdk: ">=2.1.0 <3.0.0"

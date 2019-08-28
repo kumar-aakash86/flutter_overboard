@@ -1,10 +1,12 @@
 # flutter_overboard
 
-Onboarding widget for flutter to create beautiful onboarding slides with minimal code.
+Onboarding widget for flutter to create beautiful onboarding slides w minimal code.
 
 
 ## Demo
-!(https://github.com/kumar-aakash86/ak-universal-android-helper/blob/master/screen/sample.gif)
+![https://github.com/kumar-aakash86/flutter_overboard/blob/master/screenshots/01.jpg]  
+![https://github.com/kumar-aakash86/flutter_overboard/blob/master/screenshots/02.jpg]  
+![https://github.com/kumar-aakash86/flutter_overboard/blob/master/screenshots/03.jpg]
 
 
 ## Usage

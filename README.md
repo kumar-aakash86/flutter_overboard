@@ -4,9 +4,9 @@ Onboarding widget for flutter to create beautiful onboarding slides w minimal co
 
 
 ## Demo
-![https://github.com/kumar-aakash86/flutter_overboard/blob/master/screenshots/01.jpg]  
-![https://github.com/kumar-aakash86/flutter_overboard/blob/master/screenshots/02.jpg]  
-![https://github.com/kumar-aakash86/flutter_overboard/blob/master/screenshots/03.jpg]
+![Screenshot 1](https://github.com/kumar-aakash86/flutter_overboard/blob/master/screenshots/01.jpg)  
+![Screenshot 2](https://github.com/kumar-aakash86/flutter_overboard/blob/master/screenshots/02.jpg)  
+![Screenshot 3](https://github.com/kumar-aakash86/flutter_overboard/blob/master/screenshots/03.jpg)  
 
 
 ## Usage

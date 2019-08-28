@@ -1,5 +1,5 @@
 # flutter_overboard  
-[![pub package](https://img.shields.io/badge/pub-v1.0.3-blue)](https://pub.dev/packages/flutter_overboard)  
+[![pub package](https://img.shields.io/badge/pub-v1.0.4-blue)](https://pub.dev/packages/flutter_overboard)  
 
 
 Onboarding widget for flutter to create beautiful onboarding slides with minimal code.

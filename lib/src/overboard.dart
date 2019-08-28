@@ -10,7 +10,13 @@ class OverBoard extends StatefulWidget {
   final bool showBullets;
   final VoidCallback finishCallback;
 
-  const OverBoard({Key key, @required this.pages, this.center, this.showBullets, @required this.finishCallback}) : super(key: key);
+  const OverBoard(
+      {Key key,
+      @required this.pages,
+      this.center,
+      this.showBullets,
+      @required this.finishCallback})
+      : super(key: key);
 
   @override
   _OverBoardState createState() => _OverBoardState();
@@ -90,7 +96,7 @@ class _OverBoardState extends State<OverBoard> with TickerProviderStateMixin {
                     onPressed: () {
                       setState(() {
                         _last = _counter;
-                        _counter = _total-1;
+                        _counter = _total - 1;
                       });
                       _controller.forward(from: 0);
                     },
@@ -116,32 +122,34 @@ class _OverBoardState extends State<OverBoard> with TickerProviderStateMixin {
                     padding: const EdgeInsets.all(20.0),
                     textColor: Colors.white,
                     child: Text("FINISH"),
-                    onPressed: widget.finishCallback
-                  ),
+                    onPressed: widget.finishCallback),
           ),
-          (widget.showBullets ?? true) ? Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(50.0, 0.0, 50.0, 20.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  for (int i = 0; i < _total; i++)
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Container(
-                        height: 10.0,
-                        width: 10.0,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color:
-                                (i == _counter ? Colors.white : Colors.white30)),
-                      ),
-                    )
-                ],
-              ),
-            ),
-          ) : Container(),
+          (widget.showBullets ?? true)
+              ? Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(50.0, 0.0, 50.0, 20.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        for (int i = 0; i < _total; i++)
+                          Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: Container(
+                              height: 10.0,
+                              width: 10.0,
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: (i == _counter
+                                      ? Colors.white
+                                      : Colors.white30)),
+                            ),
+                          )
+                      ],
+                    ),
+                  ),
+                )
+              : Container(),
         ],
       ),
     );
@@ -165,9 +173,11 @@ class _OverBoardState extends State<OverBoard> with TickerProviderStateMixin {
             ),
           ),
           Padding(
-            padding: new EdgeInsets.only(top: 10.0, bottom: 10.0),
+            padding: new EdgeInsets.only(
+                top: 10.0, bottom: 10.0, left: 30.0, right: 30.0),
             child: new Text(
               page.title,
+              textAlign: TextAlign.center,
               style: new TextStyle(
                 color: Colors.white,
                 fontSize: 34.0,

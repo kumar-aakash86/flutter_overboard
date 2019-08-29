@@ -1,3 +1,6 @@
+## [1.0.5] - 289th August, 2019
+* Handle UI with many items
+
 ## [1.0.1-1.0.4] - 28th August, 2019
 * Minor fixes
 

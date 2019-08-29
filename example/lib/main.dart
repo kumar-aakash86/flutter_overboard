@@ -8,12 +8,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Flutter Overboard Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'Flutter Overboard Home Page'),
     );
   }
 }
@@ -27,8 +27,13 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _globalKey = new GlobalKey<ScaffoldState>();
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,11 +52,30 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   final pages = [
-    new PageModel(const Color(0xFF0097A7), 'assets/01.png', 'Screen 1',
-        'Share your ideas with the team'),
-    new PageModel(const Color(0xFF536DFE), 'assets/02.png', 'Screen 2',
-        'See the increase in productivity & output'),
-    new PageModel(const Color(0xFF9B90BC), 'assets/03.png', 'Screen 3',
-        'Connect with the people from different places'),
+    new PageModel(
+        color: const Color(0xFF0097A7),
+        imageAssetPath: 'assets/01.png',
+        title: 'Screen 1',
+        body: 'Share your ideas with the team',
+        doAnimateImage: true),
+    new PageModel(
+        color: const Color(0xFF536DFE),
+        imageAssetPath: 'assets/02.png',
+        title: 'Screen 2',
+        body: 'See the increase in productivity & output',
+        doAnimateImage: true),
+    new PageModel(
+        color: const Color(0xFF9B90BC),
+        imageAssetPath: 'assets/03.png',
+        title: 'Screen 3',
+        body: 'Connect with the people from different places',
+        doAnimateImage: true),
+    PageModel.withChild(
+        child: new Padding(
+          padding: new EdgeInsets.only(bottom: 25.0),
+          child: new Image.asset('assets/02.png', width: 300.0, height: 300.0),
+        ),
+        color: const Color(0xFF5886d6),
+        doAnimateChild: true)
   ];
 }

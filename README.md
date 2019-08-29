@@ -1,5 +1,5 @@
 # flutter_overboard  
-[![pub package](https://img.shields.io/badge/pub-v1.0.5-blue)](https://pub.dev/packages/flutter_overboard)  
+[![pub package](https://img.shields.io/badge/pub-v1.1.3-blue)](https://pub.dev/packages/flutter_overboard)  
 
 
 Onboarding widget for flutter to create beautiful onboarding slides with minimal code.
@@ -16,26 +16,49 @@ Add following command in your **pubspec.yaml** & install package
     
 
 
-Import in your dart page
+_**Import in your dart page**_
 ```
 import 'package:flutter_overboard/flutter_overboard.dart';
 ```  
   
   
-Create a pages array like   
+**_Create a pages array like_**   
 ```
     final pages = [
-        new PageModel(const Color(0xFF0097A7), 'assets/01.png', 'Screen 1',
-            'Share your ideas with the team'),
-        new PageModel(const Color(0xFF536DFE), 'assets/02.png', 'Screen 2',
-            'See the increase in productivity & output'),
-        new PageModel(const Color(0xFF9B90BC), 'assets/03.png', 'Screen 3',
-            'Connect with the people from different places'),
+        new PageModel(
+            color: const Color(0xFF0097A7),
+            imageAssetPath: 'assets/01.png',
+            title: 'Screen 1',
+            body: 'Share your ideas with the team',
+            doAnimateImage: true),
+        new PageModel(
+            color: const Color(0xFF536DFE),
+            imageAssetPath: 'assets/02.png',
+            title: 'Screen 2',
+            body: 'See the increase in productivity & output',
+            doAnimateImage: true),
+        new PageModel(
+            color: const Color(0xFF9B90BC),
+            imageAssetPath: 'assets/03.png',
+            title: 'Screen 3',
+            body: 'Connect with the people from different places',
+            doAnimateImage: true),
     ];
 ```   
   
+**_You can also pass widgets as page model_** 
+```
+    PageModel.withChild(
+        child: new Padding(
+          padding: new EdgeInsets.only(bottom: 25.0),
+          child: new Image.asset('assets/02.png', width: 300.0, height: 300.0),
+        ),
+        color: const Color(0xFF5886d6),
+        doAnimateChild: true)
+```
   
-Add follwing in you dart code widget
+  
+**_Add follwing in you dart code widget_**
 ```
     OverBoard(
         pages: pages,
@@ -48,7 +71,7 @@ Add follwing in you dart code widget
   
   
 
-That's it. You are done with the setup now try to run your app.
+**That's it. You are done with the setup now try to run your app.**
 
 ## Example
 ```
@@ -101,12 +124,24 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   final pages = [
-    new PageModel(const Color(0xFF0097A7), 'assets/01.png', 'Screen 1',
-        'Share your ideas with the team'),
-    new PageModel(const Color(0xFF536DFE), 'assets/02.png', 'Screen 2',
-        'See the increase in productivity & output'),
-    new PageModel(const Color(0xFF9B90BC), 'assets/03.png', 'Screen 3',
-        'Connect with the people from different places'),
+        new PageModel(
+            color: const Color(0xFF0097A7),
+            imageAssetPath: 'assets/01.png',
+            title: 'Screen 1',
+            body: 'Share your ideas with the team',
+            doAnimateImage: true),
+        new PageModel(
+            color: const Color(0xFF536DFE),
+            imageAssetPath: 'assets/02.png',
+            title: 'Screen 2',
+            body: 'See the increase in productivity & output',
+            doAnimateImage: true),
+        new PageModel(
+            color: const Color(0xFF9B90BC),
+            imageAssetPath: 'assets/03.png',
+            title: 'Screen 3',
+            body: 'Connect with the people from different places',
+            doAnimateImage: true),
   ];
 }
 ```

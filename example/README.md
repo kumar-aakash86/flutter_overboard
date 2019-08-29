@@ -1,16 +1,72 @@
 # example
+```
+import 'package:flutter/material.dart';
 
-A new Flutter project.
+import 'package:flutter_overboard/flutter_overboard.dart';
 
-## Getting Started
+void main() => runApp(MyApp());
 
-This project is a starting point for a Flutter application.
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: MyHomePage(title: 'Flutter Demo Home Page'),
+    );
+  }
+}
 
-A few resources to get you started if this is your first Flutter project:
+class MyHomePage extends StatefulWidget {
+  MyHomePage({Key key, this.title}) : super(key: key);
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+  final String title;
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  final GlobalKey<ScaffoldState> _globalKey = new GlobalKey<ScaffoldState>();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      key: _globalKey,
+      body: OverBoard(
+        pages: pages,
+        showBullets: true,
+        finishCallback: () {
+          _globalKey.currentState.showSnackBar(SnackBar(
+            content: Text("Finish clicked"),
+          ));
+        },
+      ),
+    );
+  }
+
+  final pages = [    
+        new PageModel(
+            color: const Color(0xFF0097A7),
+            imageAssetPath: 'assets/01.png',
+            title: 'Screen 1',
+            body: 'Share your ideas with the team',
+            doAnimateImage: true),
+        new PageModel(
+            color: const Color(0xFF536DFE),
+            imageAssetPath: 'assets/02.png',
+            title: 'Screen 2',
+            body: 'See the increase in productivity & output',
+            doAnimateImage: true),
+        new PageModel(
+            color: const Color(0xFF9B90BC),
+            imageAssetPath: 'assets/03.png',
+            title: 'Screen 3',
+            body: 'Connect with the people from different places',
+            doAnimateImage: true),
+  ];
+}
+```

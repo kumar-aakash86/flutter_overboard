@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_overboard/src/circular_clipper.dart';
+import 'package:flutter_overboard/src/overboard_animator.dart';
 import 'package:flutter_overboard/src/page_model.dart';
 
 enum SwipeDirection { LEFT_TO_RIGHT, RIGHT_TO_LEFT, SKIP_TO_LAST }
@@ -11,13 +12,15 @@ class OverBoard extends StatefulWidget {
   final Offset center;
   final bool showBullets;
   final VoidCallback finishCallback;
+  final OverBoardAnimator animator;
 
-  const OverBoard(
+  OverBoard(
       {Key key,
       @required this.pages,
       this.center,
       this.showBullets,
-      @required this.finishCallback})
+      @required this.finishCallback,
+      this.animator})
       : super(key: key);
 
   @override
@@ -25,8 +28,7 @@ class OverBoard extends StatefulWidget {
 }
 
 class _OverBoardState extends State<OverBoard> with TickerProviderStateMixin {
-  AnimationController _controller;
-  Animation _animation;
+  OverBoardAnimator _animator;
 
   ScrollController _scrollController = new ScrollController();
   double _bulletPadding = 5.0, _bulletSize = 10.0, _bulletContainerWidth = 0;
@@ -41,10 +43,7 @@ class _OverBoardState extends State<OverBoard> with TickerProviderStateMixin {
   void initState() {
     super.initState();
 
-    _controller = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 500));
-    _animation = CurvedAnimation(parent: _controller, curve: Curves.easeIn);
-
+    _animator = new OverBoardAnimator(this);
     _total = widget.pages.length;
   }
 
@@ -86,10 +85,11 @@ class _OverBoardState extends State<OverBoard> with TickerProviderStateMixin {
         children: <Widget>[
           _getPage(_last),
           AnimatedBuilder(
-            animation: _animation,
+            animation: _animator.getAnimator(),
             builder: (context, child) {
               return ClipOval(
-                  clipper: CircularClipper(_animation.value, widget.center),
+                  clipper: CircularClipper(
+                      _animator.getAnimator().value, widget.center),
                   child: _getPage(_counter));
             },
             child: Container(),
@@ -122,7 +122,7 @@ class _OverBoardState extends State<OverBoard> with TickerProviderStateMixin {
                         padding: const EdgeInsets.all(20.0),
                         child: ((widget.showBullets ?? true)
                             ? SingleChildScrollView(
-                              physics: NeverScrollableScrollPhysics(),
+                                physics: NeverScrollableScrollPhysics(),
                                 scrollDirection: Axis.horizontal,
                                 controller: _scrollController,
                                 child: Row(
@@ -173,44 +173,57 @@ class _OverBoardState extends State<OverBoard> with TickerProviderStateMixin {
     PageModel page = widget.pages[index];
     return Container(
       width: double.infinity,
+      height: double.infinity,
       color: page.color,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          new Transform(
-            transform: new Matrix4.translationValues(
-                0.0, 50.0 * (1.0 - _animation.value), 0.0),
-            child: new Padding(
-              padding: new EdgeInsets.only(bottom: 25.0),
-              child: new Image.asset(page.imageAssetPath,
-                  width: 300.0, height: 300.0),
+      child: page.child != null
+          ? Center(
+              child: page.doAnimateChild
+                  ? AnimatedBoard(
+                      animator: _animator,
+                      child: page.child,
+                    )
+                  : page.child,
+            )
+          : Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                page.doAnimateImage
+                    ? AnimatedBoard(
+                        animator: _animator,
+                        child: new Padding(
+                          padding: new EdgeInsets.only(bottom: 25.0),
+                          child: new Image.asset(page.imageAssetPath,
+                              width: 300.0, height: 300.0),
+                        ),
+                      )
+                    : Image.asset(page.imageAssetPath,
+                        width: 300.0, height: 300.0),
+                Padding(
+                  padding: new EdgeInsets.only(
+                      top: 10.0, bottom: 10.0, left: 30.0, right: 30.0),
+                  child: new Text(
+                    page.title,
+                    textAlign: TextAlign.center,
+                    style: new TextStyle(
+                      color: Colors.white,
+                      fontSize: 34.0,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: new EdgeInsets.only(
+                      bottom: 75.0, left: 30.0, right: 30.0),
+                  child: new Text(
+                    page.body,
+                    textAlign: TextAlign.center,
+                    style: new TextStyle(
+                      color: Colors.white,
+                      fontSize: 18.0,
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ),
-          Padding(
-            padding: new EdgeInsets.only(
-                top: 10.0, bottom: 10.0, left: 30.0, right: 30.0),
-            child: new Text(
-              page.title,
-              textAlign: TextAlign.center,
-              style: new TextStyle(
-                color: Colors.white,
-                fontSize: 34.0,
-              ),
-            ),
-          ),
-          Padding(
-            padding: new EdgeInsets.only(bottom: 75.0, left: 30.0, right: 30.0),
-            child: new Text(
-              page.body,
-              textAlign: TextAlign.center,
-              style: new TextStyle(
-                color: Colors.white,
-                fontSize: 18.0,
-              ),
-            ),
-          ),
-        ],
-      ),
     );
   }
 
@@ -233,7 +246,7 @@ class _OverBoardState extends State<OverBoard> with TickerProviderStateMixin {
   }
 
   _animate() {
-    _controller.forward(from: 0);
+    _animator.getController().forward(from: 0.0);
 
     double _bulletDimension = (_bulletPadding * 2) + (_bulletSize);
     double _scroll = _bulletDimension * _counter;
@@ -243,17 +256,33 @@ class _OverBoardState extends State<OverBoard> with TickerProviderStateMixin {
       double _scrollDistance =
           (((_scroll - _bulletContainerWidth) ~/ _bulletDimension) + 1) *
               _bulletDimension;
-      // print("scroll forward = ${_scroll } = ${_scrollDistance}  ===  ${_scroll - _scrollDistance}");
       _scrollController.animateTo(_scrollDistance,
           curve: Curves.easeIn, duration: Duration(milliseconds: 100));
     } else if (_scroll < (_maxScroll - _bulletContainerWidth) &&
         _swipeDirection == SwipeDirection.LEFT_TO_RIGHT) {
-      // print("scroll back = ${_maxScroll - _bulletContainerWidth}");
       _scrollController.animateTo(_scroll,
           curve: Curves.easeIn, duration: Duration(milliseconds: 100));
     } else if (_swipeDirection == SwipeDirection.SKIP_TO_LAST) {
       _scrollController.animateTo(_maxScroll,
           curve: Curves.easeIn, duration: Duration(milliseconds: 100));
     }
+  }
+}
+
+class AnimatedBoard extends StatelessWidget {
+  final Widget child;
+  final OverBoardAnimator animator;
+
+  const AnimatedBoard({Key key, this.animator, this.child}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Transform(
+      transform: new Matrix4.translationValues(
+          0.0, 50.0 * (1.0 - animator.getAnimator().value), 0.0),
+      child: new Padding(
+        padding: new EdgeInsets.only(bottom: 25.0),
+        child: child,
+      ),
+    );
   }
 }

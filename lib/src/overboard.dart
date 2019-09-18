@@ -12,6 +12,7 @@ class OverBoard extends StatefulWidget {
   final Offset center;
   final bool showBullets;
   final VoidCallback finishCallback;
+  final VoidCallback skipCallback;
   final OverBoardAnimator animator;
 
   OverBoard(
@@ -20,7 +21,7 @@ class OverBoard extends StatefulWidget {
       this.center,
       this.showBullets,
       @required this.finishCallback,
-      this.animator})
+      this.animator, this.skipCallback})
       : super(key: key);
 
   @override
@@ -101,19 +102,15 @@ class _OverBoardState extends State<OverBoard> with TickerProviderStateMixin {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                (_counter < _total - 1
-                    ? FlatButton(
+                Opacity(
+                  child: FlatButton(
                         padding: const EdgeInsets.all(20.0),
                         textColor: Colors.white,
                         child: Text("SKIP"),
-                        onPressed: _skip,
-                      )
-                    : FlatButton(
-                        padding: const EdgeInsets.all(20.0),
-                        textColor: widget.pages[_counter].color,
-                        child: Text("SKIP"),
-                        onPressed: _skip,
-                      )),
+                        onPressed:  (widget.skipCallback != null ? widget.skipCallback : _skip),
+                      ),
+                  opacity: (_counter < _total - 1) ? 1.0 : 0.0,
+                ),
                 Expanded(
                   child: Center(child: LayoutBuilder(
                     builder: (context, constraints) {

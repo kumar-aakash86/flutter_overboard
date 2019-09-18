@@ -1,3 +1,7 @@
+## [1.1.4] - 18th September, 2019
+* Added skip button callback
+* Circle ripple center offset property
+
 ## [1.1.0-1.1.3] - 29th August, 2019
 * Option to pass complete widget with "PageModel.withChild"
 * Enable animation for child widget

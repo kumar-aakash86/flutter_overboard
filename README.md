@@ -12,7 +12,7 @@ Onboarding widget for flutter to create beautiful onboarding slides with minimal
 ## Usage
 Add following command in your **pubspec.yaml** & install package
 
-`flutter_overboard:1.1.3`
+`flutter_overboard:1.1.4`
     
 
 

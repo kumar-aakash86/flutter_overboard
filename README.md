@@ -169,4 +169,4 @@ class _MyHomePageState extends State<MyHomePage> {
 
 
 # LICENSE
-[MIT LICENSE](https://github.com/kumar-aakash86/flutter_overboard/blob/master/LICENSE)
+[MIT LICENSE](https://github.com/kumar-aakash86/flutter_overboard/blob/master/LICENSE.md)

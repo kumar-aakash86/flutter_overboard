@@ -81,6 +81,6 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
           child: Image.asset('assets/02.png', width: 300.0, height: 300.0),
         ),
         color: const Color(0xFF5886d6),
-        doAnimateChild: true)
+        doAnimateChild: false)
   ];
 }

@@ -1,5 +1,5 @@
 # flutter_overboard  
-[![pub package](https://img.shields.io/badge/pub-v1.1.4-blue)](https://pub.dev/packages/flutter_overboard)  
+[![pub package](https://img.shields.io/badge/pub-v1.1.5-blue)](https://pub.dev/packages/flutter_overboard)  
 
 
 Onboarding widget for flutter to create beautiful onboarding slides with minimal code.
@@ -12,7 +12,7 @@ Onboarding widget for flutter to create beautiful onboarding slides with minimal
 ## Usage
 Add following command in your **pubspec.yaml** & install package
 
-`flutter_overboard:1.1.4`
+`flutter_overboard:1.1.5`
     
 
 
@@ -72,6 +72,8 @@ import 'package:flutter_overboard/flutter_overboard.dart';
       ),
 ```
   
+**That's it. You are done with the setup now try to run your app.**
+
   
 **_To customize the circle reveal center point use_**
 ```
@@ -79,8 +81,13 @@ import 'package:flutter_overboard/flutter_overboard.dart';
 ```
   
   
-
-**That's it. You are done with the setup now try to run your app.**
+**_To customize the text of buttons_**
+```
+    skipText: "Go Out",
+    nextText: "Go Forward",
+    finishText: "END",
+```
+  
 
 ## Example
 ```

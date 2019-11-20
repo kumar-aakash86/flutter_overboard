@@ -14,12 +14,16 @@ class OverBoard extends StatefulWidget {
   final VoidCallback finishCallback;
   final VoidCallback skipCallback;
   final OverBoardAnimator animator;
+  final String skipText, nextText, finishText;
 
   OverBoard(
       {Key key,
       @required this.pages,
       this.center,
       this.showBullets,
+      this.skipText,
+      this.nextText,
+      this.finishText,
       @required this.finishCallback,
       this.animator, this.skipCallback})
       : super(key: key);
@@ -106,7 +110,7 @@ class _OverBoardState extends State<OverBoard> with TickerProviderStateMixin {
                   child: FlatButton(
                         padding: const EdgeInsets.all(20.0),
                         textColor: Colors.white,
-                        child: Text("SKIP"),
+                        child: Text(widget.skipText ?? "SKIP"),
                         onPressed:  (widget.skipCallback != null ? widget.skipCallback : _skip),
                       ),
                   opacity: (_counter < _total - 1) ? 1.0 : 0.0,
@@ -150,13 +154,13 @@ class _OverBoardState extends State<OverBoard> with TickerProviderStateMixin {
                     ? FlatButton(
                         padding: const EdgeInsets.all(20.0),
                         textColor: Colors.white,
-                        child: Text("NEXT"),
+                        child: Text(widget.nextText ?? "NEXT"),
                         onPressed: _next,
                       )
                     : FlatButton(
                         padding: const EdgeInsets.all(20.0),
                         textColor: Colors.white,
-                        child: Text("FINISH"),
+                        child: Text(widget.finishText ?? "FINISH"),
                         onPressed: widget.finishCallback)),
               ],
             ),

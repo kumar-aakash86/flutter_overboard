@@ -1,3 +1,6 @@
+## [1.1.5] - 20th November, 2019
+* Custom text for skip, next & finish buttons
+
 ## [1.1.4] - 18th September, 2019
 * Added skip button callback
 * Circle ripple center offset property

@@ -14,6 +14,7 @@ class OverBoard extends StatefulWidget {
   final VoidCallback finishCallback;
   final VoidCallback? skipCallback;
   final String? skipText, nextText, finishText;
+  final Color buttonColor;
 
   OverBoard(
       {Key? key,
@@ -24,7 +25,8 @@ class OverBoard extends StatefulWidget {
       this.nextText,
       this.finishText,
       required this.finishCallback,
-      this.skipCallback})
+      this.skipCallback,
+      this.buttonColor = Colors.white})
       : super(key: key);
 
   @override
@@ -228,7 +230,7 @@ class _OverBoardState extends State<OverBoard> with TickerProviderStateMixin {
       ),
       child: Text(
         _text,
-        style: TextStyle(color: Colors.white),
+        style: TextStyle(color: widget.buttonColor),
       ),
       onPressed: _onPress,
     );

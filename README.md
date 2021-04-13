@@ -1,5 +1,5 @@
 # flutter_overboard  
-[![pub package](https://img.shields.io/badge/pub-v2.0.0-blue)](https://pub.dev/packages/flutter_overboard)  
+[![pub package](https://img.shields.io/badge/pub-v2.0.1-blue)](https://pub.dev/packages/flutter_overboard)  
 
 
 Onboarding widget for flutter to create beautiful onboarding slides with minimal code.
@@ -12,7 +12,7 @@ Onboarding widget for flutter to create beautiful onboarding slides with minimal
 ## Usage
 Add following command in your **pubspec.yaml** & install package
 
-`flutter_overboard:2.0.0`
+`flutter_overboard:2.0.1`
     
 
 
@@ -86,6 +86,12 @@ import 'package:flutter_overboard/flutter_overboard.dart';
     skipText: "Go Out",
     nextText: "Go Forward",
     finishText: "END",
+```
+  
+  
+**_To customize the color of buttons_**
+```
+    buttonColor: Colors.blue,
 ```
   
 

@@ -42,7 +42,6 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       body: OverBoard(
         pages: pages,
         showBullets: true,
-        buttonColor: Colors.red,
         skipCallback: () {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text("Skip clicked"),

@@ -1,5 +1,6 @@
-## [2.0.0] - 13th April, 2021
+## [2.0.1] - 13th April, 2021
 * Null safety added
+* Button text color support
 
 ## [1.1.5] - 20th November, 2019
 * Custom text for skip, next & finish buttons

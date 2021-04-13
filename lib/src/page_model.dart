@@ -3,23 +3,23 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 
 class PageModel {
-  Color color;
-  String imageAssetPath;
-  String title;
-  String body;
-  Widget child;
-  bool doAnimateChild;
-  bool doAnimateImage;
+  Color? color;
+  String? imageAssetPath;
+  String? title;
+  String? body;
+  Widget? child;
+  bool doAnimateChild = false;
+  bool doAnimateImage = false;
 
   PageModel(
-      {@required this.color,
+      {this.color,
       @required this.imageAssetPath,
       @required this.title,
       @required this.body,
-      @required this.doAnimateImage});
+      this.doAnimateImage = false});
 
   PageModel.withChild(
       {@required this.child,
       @required this.color,
-      @required this.doAnimateChild});
+      this.doAnimateChild = false});
 }

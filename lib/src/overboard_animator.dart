@@ -2,9 +2,9 @@ import 'package:flutter/animation.dart';
 import 'package:flutter/widgets.dart';
 
 class OverBoardAnimator {
-  TickerProvider _vsync;
-  AnimationController _controller;
-  Animation _animation;
+  late TickerProvider _vsync;
+  late AnimationController _controller;
+  late Animation _animation;
 
   //  static final OverBoardAnimator _singleton = new OverBoardAnimator._internal();
 

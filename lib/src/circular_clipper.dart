@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class CircularClipper extends CustomClipper<Rect> {
-  final Offset center;
+  final Offset? center;
   final double fraction;
 
-  CircularClipper(this.fraction, [this.center]);
+  CircularClipper(this.fraction, this.center);
   @override
   Rect getClip(Size size) {
     Rect rect = Rect.fromCircle(

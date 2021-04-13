@@ -43,12 +43,12 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         pages: pages,
         showBullets: true,
         skipCallback: () {
-          _globalKey.currentState.showSnackBar(SnackBar(
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text("Skip clicked"),
           ));
         },
         finishCallback: () {
-          _globalKey.currentState.showSnackBar(SnackBar(
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text("Finish clicked"),
           ));
         },

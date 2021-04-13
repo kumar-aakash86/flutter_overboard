@@ -9,23 +9,22 @@ enum SwipeDirection { LEFT_TO_RIGHT, RIGHT_TO_LEFT, SKIP_TO_LAST }
 
 class OverBoard extends StatefulWidget {
   final List<PageModel> pages;
-  final Offset center;
+  final Offset? center;
   final bool showBullets;
   final VoidCallback finishCallback;
-  final VoidCallback skipCallback;
-  final OverBoardAnimator animator;
-  final String skipText, nextText, finishText;
+  final VoidCallback? skipCallback;
+  final String? skipText, nextText, finishText;
 
   OverBoard(
-      {Key key,
-      @required this.pages,
+      {Key? key,
+      required this.pages,
       this.center,
-      this.showBullets,
+      this.showBullets = true,
       this.skipText,
       this.nextText,
       this.finishText,
-      @required this.finishCallback,
-      this.animator, this.skipCallback})
+      required this.finishCallback,
+      this.skipCallback})
       : super(key: key);
 
   @override
@@ -33,7 +32,7 @@ class OverBoard extends StatefulWidget {
 }
 
 class _OverBoardState extends State<OverBoard> with TickerProviderStateMixin {
-  OverBoardAnimator _animator;
+  late OverBoardAnimator _animator;
 
   ScrollController _scrollController = new ScrollController();
   double _bulletPadding = 5.0, _bulletSize = 10.0, _bulletContainerWidth = 0;
@@ -107,12 +106,11 @@ class _OverBoardState extends State<OverBoard> with TickerProviderStateMixin {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Opacity(
-                  child: FlatButton(
-                        padding: const EdgeInsets.all(20.0),
-                        textColor: Colors.white,
-                        child: Text(widget.skipText ?? "SKIP"),
-                        onPressed:  (widget.skipCallback != null ? widget.skipCallback : _skip),
-                      ),
+                  child: _getTextButton(
+                      widget.skipText ?? "SKIP",
+                      (widget.skipCallback != null
+                          ? widget.skipCallback
+                          : _skip)),
                   opacity: (_counter < _total - 1) ? 1.0 : 0.0,
                 ),
                 Expanded(
@@ -121,7 +119,7 @@ class _OverBoardState extends State<OverBoard> with TickerProviderStateMixin {
                       _bulletContainerWidth = constraints.maxWidth - 40.0;
                       return Container(
                         padding: const EdgeInsets.all(20.0),
-                        child: ((widget.showBullets ?? true)
+                        child: (widget.showBullets
                             ? SingleChildScrollView(
                                 physics: NeverScrollableScrollPhysics(),
                                 scrollDirection: Axis.horizontal,
@@ -151,17 +149,12 @@ class _OverBoardState extends State<OverBoard> with TickerProviderStateMixin {
                   )),
                 ),
                 (_counter < _total - 1
-                    ? FlatButton(
-                        padding: const EdgeInsets.all(20.0),
-                        textColor: Colors.white,
-                        child: Text(widget.nextText ?? "NEXT"),
-                        onPressed: _next,
+                    ? _getTextButton(
+                        (widget.nextText ?? "NEXT"),
+                        _next,
                       )
-                    : FlatButton(
-                        padding: const EdgeInsets.all(20.0),
-                        textColor: Colors.white,
-                        child: Text(widget.finishText ?? "FINISH"),
-                        onPressed: widget.finishCallback)),
+                    : _getTextButton((widget.finishText ?? "FINISH"),
+                        widget.finishCallback)),
               ],
             ),
           ),
@@ -193,17 +186,17 @@ class _OverBoardState extends State<OverBoard> with TickerProviderStateMixin {
                         animator: _animator,
                         child: new Padding(
                           padding: new EdgeInsets.only(bottom: 25.0),
-                          child: new Image.asset(page.imageAssetPath,
+                          child: new Image.asset(page.imageAssetPath!,
                               width: 300.0, height: 300.0),
                         ),
                       )
-                    : Image.asset(page.imageAssetPath,
+                    : Image.asset(page.imageAssetPath!,
                         width: 300.0, height: 300.0),
                 Padding(
                   padding: new EdgeInsets.only(
                       top: 10.0, bottom: 10.0, left: 30.0, right: 30.0),
                   child: new Text(
-                    page.title,
+                    page.title!,
                     textAlign: TextAlign.center,
                     style: new TextStyle(
                       color: Colors.white,
@@ -215,7 +208,7 @@ class _OverBoardState extends State<OverBoard> with TickerProviderStateMixin {
                   padding: new EdgeInsets.only(
                       bottom: 75.0, left: 30.0, right: 30.0),
                   child: new Text(
-                    page.body,
+                    page.body!,
                     textAlign: TextAlign.center,
                     style: new TextStyle(
                       color: Colors.white,
@@ -225,6 +218,19 @@ class _OverBoardState extends State<OverBoard> with TickerProviderStateMixin {
                 ),
               ],
             ),
+    );
+  }
+
+  _getTextButton(_text, _onPress) {
+    return TextButton(
+      style: TextButton.styleFrom(
+        padding: const EdgeInsets.all(20.0),
+      ),
+      child: Text(
+        _text,
+        style: TextStyle(color: Colors.white),
+      ),
+      onPressed: _onPress,
     );
   }
 
@@ -271,10 +277,11 @@ class _OverBoardState extends State<OverBoard> with TickerProviderStateMixin {
 }
 
 class AnimatedBoard extends StatelessWidget {
-  final Widget child;
+  final Widget? child;
   final OverBoardAnimator animator;
 
-  const AnimatedBoard({Key key, this.animator, this.child}) : super(key: key);
+  const AnimatedBoard({Key? key, required this.animator, required this.child})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Transform(

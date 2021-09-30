@@ -1,3 +1,6 @@
+## [3.0.0] - 30th Sept, 2021
+* Migrated to AndroidX
+
 ## [2.0.1] - 13th April, 2021
 * Null safety added
 * Button text color support

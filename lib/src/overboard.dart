@@ -8,13 +8,41 @@ import 'package:flutter_overboard/src/page_model.dart';
 enum SwipeDirection { LEFT_TO_RIGHT, RIGHT_TO_LEFT, SKIP_TO_LAST }
 
 class OverBoard extends StatefulWidget {
+  /// List of pages to render on-boarding
   final List<PageModel> pages;
+
+  /// Offset to set center point of revealing circle
   final Offset? center;
+
+  /// Enable/disable bullets visibility
   final bool showBullets;
+
+  /// Callback method to capture finish button click
   final VoidCallback finishCallback;
+
+  /// Callback method to capture skip button click
   final VoidCallback? skipCallback;
-  final String? skipText, nextText, finishText;
+
+  /// Customize skip button text
+  final String? skipText;
+
+  /// Customize next button text
+  final String? nextText;
+
+  /// Customize finish button text
+  final String? finishText;
+
+  /// Change action button colors
   final Color buttonColor;
+
+  /// Change active bullet color
+  final Color activeBulletColor;
+
+  /// Change inactive bullet color
+  final Color inactiveBulletColor;
+
+  // Overboard background provider
+  final ImageProvider<Object>? backgroundProvider;
 
   OverBoard(
       {Key? key,
@@ -26,7 +54,10 @@ class OverBoard extends StatefulWidget {
       this.finishText,
       required this.finishCallback,
       this.skipCallback,
-      this.buttonColor = Colors.white})
+      this.buttonColor = Colors.white,
+      this.activeBulletColor = Colors.white,
+      this.inactiveBulletColor = Colors.white30,
+      this.backgroundProvider})
       : super(key: key);
 
   @override
@@ -45,12 +76,18 @@ class _OverBoardState extends State<OverBoard> with TickerProviderStateMixin {
   Random random = new Random();
   SwipeDirection _swipeDirection = SwipeDirection.RIGHT_TO_LEFT;
 
+  BoxDecoration _boxDecoration = BoxDecoration();
+
   @override
   void initState() {
     super.initState();
 
     _animator = new OverBoardAnimator(this);
     _total = widget.pages.length;
+
+    if (widget.backgroundProvider != null)
+      _boxDecoration = BoxDecoration(
+          image: DecorationImage(image: widget.backgroundProvider!));
   }
 
   @override
@@ -138,8 +175,9 @@ class _OverBoardState extends State<OverBoard> with TickerProviderStateMixin {
                                           decoration: BoxDecoration(
                                               shape: BoxShape.circle,
                                               color: (i == _counter
-                                                  ? Colors.white
-                                                  : Colors.white30)),
+                                                  ? widget.activeBulletColor
+                                                  : widget
+                                                      .inactiveBulletColor)),
                                         ),
                                       )
                                   ],
@@ -170,7 +208,10 @@ class _OverBoardState extends State<OverBoard> with TickerProviderStateMixin {
     return Container(
       width: double.infinity,
       height: double.infinity,
-      color: page.color,
+      decoration: _boxDecoration.copyWith(
+        color:
+            widget.backgroundProvider == null ? page.color : Colors.transparent,
+      ),
       child: page.child != null
           ? Center(
               child: page.doAnimateChild
@@ -201,7 +242,7 @@ class _OverBoardState extends State<OverBoard> with TickerProviderStateMixin {
                     page.title!,
                     textAlign: TextAlign.center,
                     style: new TextStyle(
-                      color: Colors.white,
+                      color: page.titleColor ?? Colors.white,
                       fontSize: 34.0,
                     ),
                   ),
@@ -213,7 +254,7 @@ class _OverBoardState extends State<OverBoard> with TickerProviderStateMixin {
                     page.body!,
                     textAlign: TextAlign.center,
                     style: new TextStyle(
-                      color: Colors.white,
+                      color: page.bodyColor ?? Colors.white,
                       fontSize: 18.0,
                     ),
                   ),

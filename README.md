@@ -1,5 +1,5 @@
 # flutter_overboard  
-[![pub package](https://img.shields.io/badge/pub-v2.0.1-blue)](https://pub.dev/packages/flutter_overboard)  
+[![pub package](https://img.shields.io/badge/pub-v3.0.0-blue)](https://pub.dev/packages/flutter_overboard)  
 
 
 Onboarding widget for flutter to create beautiful onboarding slides with minimal code.
@@ -75,13 +75,13 @@ import 'package:flutter_overboard/flutter_overboard.dart';
 **That's it. You are done with the setup now try to run your app.**
 
   
-**_To customize the circle reveal center point use_**
+**_To customize the circle reveal center point use (Overboard Widget)_**
 ```
     center: Offset(dx, dy);
 ```
   
   
-**_To customize the text of buttons_**
+**_To customize the text of buttons (Overboard Widget)_**
 ```
     skipText: "Go Out",
     nextText: "Go Forward",
@@ -89,11 +89,64 @@ import 'package:flutter_overboard/flutter_overboard.dart';
 ```
   
   
-**_To customize the color of buttons_**
+**_To customize the color of buttons (Overboard Widget)_**
 ```
     buttonColor: Colors.blue,
+``` 
+
+**_To customize the color of bullets (Overboard Widget)_**
+```
+    activeBulletColor: Colors.white,
+    inactiveBulletColor: Colors.white30,
+```
+
+**_To customize the background of pages (Overboard Widget)_**
+```
+  backgroundProvider: NetworkImage('https://picsum.photos/720/1280')
+```
+OR
+```
+  backgroundProvider: ImageProvider('assets/images/bg.jpg')
+```
+
+**_To customize the color of page text (PageModel Widget)_**
+```
+    titleColor: Colors.blue,
+    bodyColor: Colors.red,
 ```
   
+   
+     
+### Overboard Widget
+| PROPERTY            | TYPE            | REQUIRED | DETAILS                                        |
+| ------------------- | --------------- | -------- | ---------------------------------------------- |
+| pages               | List<PageModel> | yes      | List of pages to render on-boarding            |
+| center              | Offset          | no       | Offset to set center point of revealing circle |
+| showBullets         | Boolean         | no       | Enable/disable bullets visibility              |
+| skipText            | String          | no       | Customize skip button text                     |
+| nextText            | String          | no       | Customize next button text                     |
+| finishText          | String          | no       | Customize finish button text                   |
+| buttonColor         | Color           | no       | Customize button color                         |
+| activeBulletColor   | Color           | no       | Customize active bullet color                  |
+| inactiveBulletColor | Color           | no       | Customize inactive bullet color                |
+| backgroundProvider  | ImageProvider   | no       | Overboard background image provider            |
+| skipCallback        | VoidCallback    | no       | Skip button click callback                     |
+| finishCallback      | VoidCallback    | no       | Finish button click callback                   |
+
+
+### PageModel Widget
+| PROPERTY       | TYPE    | REQUIRED | DETAILS                                |
+| -------------- | ------- | -------- | -------------------------------------- |
+| color          | Color   | no       | Background color of the page           |
+| imageAssetPath | String  | no       | Image path from asset to show in page  |
+| title          | String  | no       | Title text of the page                 |
+| body           | String  | no       | Body text of the page                  |
+| child          | Widget  | no       | Custom widget to pass as image in page |
+| doAnimateChild | Boolean | yes      | To enable/disable child animation      |
+| doAnimateImage | Boolean | yes      | To enable/disable image animation      |
+| titleColor     | Color   | no       | Change color of title text             |
+| bodyColor      | Color   | no       | Change color of body text              |
+
 
 ## Example
 ```

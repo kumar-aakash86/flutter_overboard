@@ -115,7 +115,11 @@ OR
     bodyColor: Colors.red,
 ```
   
-   
+
+**_To add the scroll support using keyboard & mouse wheel (Overboard Widget)_**
+```
+    allowScroll: true,
+``` 
      
 ### Overboard Widget
 | PROPERTY            | TYPE            | REQUIRED | DETAILS                                        |

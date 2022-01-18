@@ -1,3 +1,6 @@
+## [3.1.0] - 18th Jan 2022
+* Keyboard & mouse scroll navigation
+
 ## [3.0.0] - 30th Sept, 2021
 * Migrated to AndroidX
 

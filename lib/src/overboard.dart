@@ -1,6 +1,8 @@
 import 'dart:math';
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_overboard/src/circular_clipper.dart';
 import 'package:flutter_overboard/src/overboard_animator.dart';
 import 'package:flutter_overboard/src/page_model.dart';
@@ -34,6 +36,7 @@ class OverBoard extends StatefulWidget {
 
   /// Change action button colors
   final Color buttonColor;
+  final bool allowScroll;
 
   /// Change active bullet color
   final Color activeBulletColor;
@@ -57,7 +60,8 @@ class OverBoard extends StatefulWidget {
       this.buttonColor = Colors.white,
       this.activeBulletColor = Colors.white,
       this.inactiveBulletColor = Colors.white30,
-      this.backgroundProvider})
+      this.backgroundProvider,
+      this.allowScroll = false})
       : super(key: key);
 
   @override
@@ -77,6 +81,8 @@ class _OverBoardState extends State<OverBoard> with TickerProviderStateMixin {
   SwipeDirection _swipeDirection = SwipeDirection.RIGHT_TO_LEFT;
 
   BoxDecoration _boxDecoration = BoxDecoration();
+  final scrollDuration = Duration(milliseconds: 1500);
+  bool isScrolling = false;
 
   @override
   void initState() {
@@ -93,6 +99,47 @@ class _OverBoardState extends State<OverBoard> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Container(
+      child: widget.allowScroll ? _keyboardWrapper() : _getStack(),
+    );
+  }
+
+  _keyboardWrapper() {
+    return RawKeyboardListener(
+      autofocus: true,
+      focusNode: FocusNode(),
+      onKey: (RawKeyEvent e) {
+        if (e is RawKeyDownEvent) {
+          if (e.isKeyPressed(LogicalKeyboardKey.arrowRight) &&
+              _counter < _total - 1) {
+            _goForward();
+          } else if (e.isKeyPressed(LogicalKeyboardKey.arrowLeft) &&
+              _counter > 0) {
+            _goBack();
+          }
+        }
+      },
+      child: _scrollWrapper(),
+    );
+  }
+
+  _scrollWrapper() {
+    return Listener(
+      onPointerSignal: (event) async {
+        if (event is PointerScrollEvent) {
+          final scrollDelta = event.scrollDelta.dy;
+          if (!isScrolling) {
+            isScrolling = true;
+            if (scrollDelta.isNegative && _counter > 0) {
+              _goBack();
+            } else if (!scrollDelta.isNegative && _counter < _total - 1) {
+              _goForward();
+            }
+
+            await Future.delayed(scrollDuration);
+            isScrolling = false;
+          }
+        }
+      },
       child: _getStack(),
     );
   }
@@ -111,17 +158,9 @@ class _OverBoardState extends State<OverBoard> with TickerProviderStateMixin {
           _last = _counter;
         });
         if (distance > 1 && _counter > 0) {
-          setState(() {
-            _counter--;
-            _swipeDirection = SwipeDirection.LEFT_TO_RIGHT;
-          });
-          _animate();
+          _goBack();
         } else if (distance < 0 && _counter < _total - 1) {
-          setState(() {
-            _counter++;
-            _swipeDirection = SwipeDirection.RIGHT_TO_LEFT;
-          });
-          _animate();
+          _goForward();
         }
       },
       child: Stack(
@@ -277,6 +316,22 @@ class _OverBoardState extends State<OverBoard> with TickerProviderStateMixin {
     );
   }
 
+  _goForward() {
+    setState(() {
+      _counter++;
+      _swipeDirection = SwipeDirection.RIGHT_TO_LEFT;
+    });
+    _animate();
+  }
+
+  _goBack() {
+    setState(() {
+      _counter--;
+      _swipeDirection = SwipeDirection.LEFT_TO_RIGHT;
+    });
+    _animate();
+  }
+
   _next() {
     setState(() {
       _swipeDirection = SwipeDirection.RIGHT_TO_LEFT;
@@ -328,7 +383,7 @@ class AnimatedBoard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Transform(
-      transform: new Matrix4.translationValues(
+      transform: Matrix4.translationValues(
           0.0, 50.0 * (1.0 - animator.getAnimator().value), 0.0),
       child: new Padding(
         padding: new EdgeInsets.only(bottom: 25.0),

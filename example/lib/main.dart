@@ -40,10 +40,11 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     return Scaffold(
       key: _globalKey,
       body: OverBoard(
+        allowScroll: true,
         pages: pages,
         showBullets: true,
         inactiveBulletColor: Colors.blue,
-        backgroundProvider: NetworkImage('https://picsum.photos/720/1280'),
+        // backgroundProvider: NetworkImage('https://picsum.photos/720/1280'),
         skipCallback: () {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text("Skip clicked"),
@@ -59,12 +60,6 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   }
 
   final pages = [
-    PageModel(
-        color: const Color(0xFFFFFFFF),
-        imageAssetPath: 'assets/03.png',
-        title: 'Screen 1',
-        body: 'Share your ideas with the team',
-        doAnimateImage: true),
     PageModel(
         color: const Color(0xFF0097A7),
         imageAssetPath: 'assets/01.png',

@@ -114,7 +114,6 @@ OR
     titleColor: Colors.blue,
     bodyColor: Colors.red,
 ```
-  
 
 **_To add the scroll support using keyboard & mouse wheel (Overboard Widget)_**
 ```

@@ -111,7 +111,7 @@ class _OverBoardState extends State<OverBoard> with TickerProviderStateMixin {
         if (e is RawKeyDownEvent) {
           if (e.isKeyPressed(LogicalKeyboardKey.arrowRight) &&
               _counter < _total - 1) {
-            _goForward();
+            _next();
           } else if (e.isKeyPressed(LogicalKeyboardKey.arrowLeft) &&
               _counter > 0) {
             _goBack();
@@ -126,13 +126,16 @@ class _OverBoardState extends State<OverBoard> with TickerProviderStateMixin {
     return Listener(
       onPointerSignal: (event) async {
         if (event is PointerScrollEvent) {
-          final scrollDelta = event.scrollDelta.dy;
+          num scrollDelta = event.scrollDelta.dy;
+          if (scrollDelta == 0) {
+            scrollDelta = event.scrollDelta.dx;
+          }
           if (!isScrolling) {
             isScrolling = true;
             if (scrollDelta.isNegative && _counter > 0) {
               _goBack();
             } else if (!scrollDelta.isNegative && _counter < _total - 1) {
-              _goForward();
+              _next();
             }
 
             await Future.delayed(scrollDuration);
@@ -160,7 +163,7 @@ class _OverBoardState extends State<OverBoard> with TickerProviderStateMixin {
         if (distance > 1 && _counter > 0) {
           _goBack();
         } else if (distance < 0 && _counter < _total - 1) {
-          _goForward();
+          _next();
         }
       },
       child: Stack(
@@ -316,18 +319,11 @@ class _OverBoardState extends State<OverBoard> with TickerProviderStateMixin {
     );
   }
 
-  _goForward() {
-    setState(() {
-      _counter++;
-      _swipeDirection = SwipeDirection.RIGHT_TO_LEFT;
-    });
-    _animate();
-  }
-
   _goBack() {
     setState(() {
-      _counter--;
       _swipeDirection = SwipeDirection.LEFT_TO_RIGHT;
+      _last = _counter;
+      _counter--;
     });
     _animate();
   }

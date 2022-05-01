@@ -34,6 +34,9 @@ class OverBoard extends StatefulWidget {
   /// Customize finish button text
   final String? finishText;
 
+  /// Customize button text style
+  final TextStyle? buttonTextStyle;
+
   /// Change action button colors
   final Color buttonColor;
   final bool allowScroll;
@@ -47,22 +50,27 @@ class OverBoard extends StatefulWidget {
   // Overboard background provider
   final ImageProvider<Object>? backgroundProvider;
 
-  OverBoard(
-      {Key? key,
-      required this.pages,
-      this.center,
-      this.showBullets = true,
-      this.skipText,
-      this.nextText,
-      this.finishText,
-      required this.finishCallback,
-      this.skipCallback,
-      this.buttonColor = Colors.white,
-      this.activeBulletColor = Colors.white,
-      this.inactiveBulletColor = Colors.white30,
-      this.backgroundProvider,
-      this.allowScroll = false})
-      : super(key: key);
+  /// Size of the bullet
+  final double bulletSize;
+
+  OverBoard({
+    Key? key,
+    required this.pages,
+    this.center,
+    this.showBullets = true,
+    this.skipText,
+    this.nextText,
+    this.finishText,
+    this.buttonTextStyle,
+    required this.finishCallback,
+    this.skipCallback,
+    this.buttonColor = Colors.white,
+    this.activeBulletColor = Colors.white,
+    this.inactiveBulletColor = Colors.white30,
+    this.backgroundProvider,
+    this.allowScroll = false,
+    this.bulletSize = 10,
+  }) : super(key: key);
 
   @override
   _OverBoardState createState() => _OverBoardState();
@@ -72,7 +80,7 @@ class _OverBoardState extends State<OverBoard> with TickerProviderStateMixin {
   late OverBoardAnimator _animator;
 
   ScrollController _scrollController = new ScrollController();
-  double _bulletPadding = 5.0, _bulletSize = 10.0, _bulletContainerWidth = 0;
+  double _bulletPadding = 5.0, _bulletContainerWidth = 0;
 
   int _counter = 0, _last = 0;
   int _total = 0;
@@ -212,8 +220,8 @@ class _OverBoardState extends State<OverBoard> with TickerProviderStateMixin {
                                       Padding(
                                         padding: EdgeInsets.all(_bulletPadding),
                                         child: Container(
-                                          height: _bulletSize,
-                                          width: _bulletSize,
+                                          height: widget.bulletSize,
+                                          width: widget.bulletSize,
                                           decoration: BoxDecoration(
                                               shape: BoxShape.circle,
                                               color: (i == _counter
@@ -247,6 +255,14 @@ class _OverBoardState extends State<OverBoard> with TickerProviderStateMixin {
 
   _getPage(index) {
     PageModel page = widget.pages[index];
+    final titleStyle = page.titleStyle ?? TextStyle(
+      color: page.titleColor ?? Colors.white,
+      fontSize: 34.0,
+    );
+    final bodyStyle = page.bodyStyle ?? TextStyle(
+      color: page.bodyColor ?? Colors.white,
+      fontSize: 18.0,
+    );
     return Container(
       width: double.infinity,
       height: double.infinity,
@@ -283,10 +299,7 @@ class _OverBoardState extends State<OverBoard> with TickerProviderStateMixin {
                   child: new Text(
                     page.title!,
                     textAlign: TextAlign.center,
-                    style: new TextStyle(
-                      color: page.titleColor ?? Colors.white,
-                      fontSize: 34.0,
-                    ),
+                    style: titleStyle,
                   ),
                 ),
                 Padding(
@@ -295,10 +308,7 @@ class _OverBoardState extends State<OverBoard> with TickerProviderStateMixin {
                   child: new Text(
                     page.body!,
                     textAlign: TextAlign.center,
-                    style: new TextStyle(
-                      color: page.bodyColor ?? Colors.white,
-                      fontSize: 18.0,
-                    ),
+                    style: bodyStyle,
                   ),
                 ),
               ],
@@ -313,7 +323,7 @@ class _OverBoardState extends State<OverBoard> with TickerProviderStateMixin {
       ),
       child: Text(
         _text,
-        style: TextStyle(color: widget.buttonColor),
+        style: widget.buttonTextStyle ?? TextStyle(color: widget.buttonColor),
       ),
       onPressed: _onPress,
     );
@@ -349,7 +359,7 @@ class _OverBoardState extends State<OverBoard> with TickerProviderStateMixin {
   _animate() {
     _animator.getController().forward(from: 0.0);
 
-    double _bulletDimension = (_bulletPadding * 2) + (_bulletSize);
+    double _bulletDimension = (_bulletPadding * 2) + (widget.bulletSize);
     double _scroll = _bulletDimension * _counter;
     double _maxScroll = _bulletDimension * _total - 1;
     if (_scroll > _bulletContainerWidth &&

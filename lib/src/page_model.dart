@@ -10,8 +10,14 @@ class PageModel {
   /// Title text of the page
   String? title;
 
+  /// Title text style of the page
+  TextStyle? titleStyle;
+
   /// Body text of the page
   String? body;
+
+  /// Body text style of the page
+  TextStyle? bodyStyle;
 
   /// Custom widget to pass as image in page
   Widget? child;
@@ -32,7 +38,9 @@ class PageModel {
   PageModel(
       {this.color,
       this.titleColor,
+      this.titleStyle,
       this.bodyColor,
+      this.bodyStyle,
       required this.imageAssetPath,
       required this.title,
       required this.body,

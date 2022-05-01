@@ -288,11 +288,11 @@ class _OverBoardState extends State<OverBoard> with TickerProviderStateMixin {
                         child: new Padding(
                           padding: new EdgeInsets.only(bottom: 25.0),
                           child: new Image.asset(page.imageAssetPath!,
-                              width: 300.0, height: 300.0),
+                              width: page.imageWidth, height: page.imageHeight),
                         ),
                       )
                     : Image.asset(page.imageAssetPath!,
-                        width: 300.0, height: 300.0),
+                        width: page.imageWidth, height: page.imageHeight),
                 Padding(
                   padding: new EdgeInsets.only(
                       top: 10.0, bottom: 10.0, left: 30.0, right: 30.0),
@@ -303,8 +303,7 @@ class _OverBoardState extends State<OverBoard> with TickerProviderStateMixin {
                   ),
                 ),
                 Padding(
-                  padding: new EdgeInsets.only(
-                      bottom: 175.0, left: 30.0, right: 30.0),
+                  padding: page.bodyPadding,
                   child: SizedBox(
                     width: double.maxFinite,
                     height: page.bodyHeight,

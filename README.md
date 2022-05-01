@@ -144,12 +144,16 @@ OR
 |----------------|-----------| -------- |----------------------------------------|
 | color          | Color     | no       | Background color of the page           |
 | imageAssetPath | String    | no       | Image path from asset to show in page  |
+| imageWidth     | double    | no       | Image width                            |
+| imageHeight    | double    | no       | Image height                           |
+| imageAssetPath | String    | no       | Image path from asset to show in page  |
 | title          | String    | no       | Title text of the page                 |
 | body           | String    | no       | Body text of the page                  |
 | titleStyle     | TextStyle | no       | Style of title text of the page        |
 | body           | String    | no       | Body text of the page                  |
 | bodyStyle      | TextStyle | no       | Style of body text of the page         |
 | bodyHeight     | double    | no       | Height of body text                    |
+| bodyPadding    | double    | no       | Padding of the body text               |
 | child          | Widget    | no       | Custom widget to pass as image in page |
 | doAnimateChild | Boolean   | yes      | To enable/disable child animation      |
 | doAnimateImage | Boolean   | yes      | To enable/disable image animation      |

@@ -19,6 +19,9 @@ class PageModel {
   /// Body text style of the page
   TextStyle? bodyStyle;
 
+  /// Height of the body
+  double? bodyHeight;
+
   /// Custom widget to pass as image in page
   Widget? child;
 
@@ -41,6 +44,7 @@ class PageModel {
       this.titleStyle,
       this.bodyColor,
       this.bodyStyle,
+      this.bodyHeight,
       required this.imageAssetPath,
       required this.title,
       required this.body,

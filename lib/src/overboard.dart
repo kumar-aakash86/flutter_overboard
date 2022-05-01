@@ -304,11 +304,18 @@ class _OverBoardState extends State<OverBoard> with TickerProviderStateMixin {
                 ),
                 Padding(
                   padding: new EdgeInsets.only(
-                      bottom: 75.0, left: 30.0, right: 30.0),
-                  child: new Text(
-                    page.body!,
-                    textAlign: TextAlign.center,
-                    style: bodyStyle,
+                      bottom: 175.0, left: 30.0, right: 30.0),
+                  child: SizedBox(
+                    width: double.maxFinite,
+                    height: page.bodyHeight,
+                    child: new Text(
+                      page.body!,
+                      textAlign: TextAlign.center,
+                      style: bodyStyle,
+                      textHeightBehavior: TextHeightBehavior(
+                        applyHeightToFirstAscent: false,
+                      ),
+                    ),
                   ),
                 ),
               ],

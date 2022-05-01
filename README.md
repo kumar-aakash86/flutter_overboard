@@ -149,6 +149,7 @@ OR
 | titleStyle     | TextStyle | no       | Style of title text of the page        |
 | body           | String    | no       | Body text of the page                  |
 | bodyStyle      | TextStyle | no       | Style of body text of the page         |
+| bodyHeight     | double    | no       | Height of body text                    |
 | child          | Widget    | no       | Custom widget to pass as image in page |
 | doAnimateChild | Boolean   | yes      | To enable/disable child animation      |
 | doAnimateImage | Boolean   | yes      | To enable/disable image animation      |

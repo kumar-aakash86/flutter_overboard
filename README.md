@@ -122,14 +122,16 @@ OR
      
 ### Overboard Widget
 | PROPERTY            | TYPE            | REQUIRED | DETAILS                                        |
-| ------------------- | --------------- | -------- | ---------------------------------------------- |
+| ------------------- |-----------------| -------- |------------------------------------------------|
 | pages               | List<PageModel> | yes      | List of pages to render on-boarding            |
 | center              | Offset          | no       | Offset to set center point of revealing circle |
 | showBullets         | Boolean         | no       | Enable/disable bullets visibility              |
+| bulletSize          | double          | no       | Customize size of the bullet                   |
 | skipText            | String          | no       | Customize skip button text                     |
 | nextText            | String          | no       | Customize next button text                     |
 | finishText          | String          | no       | Customize finish button text                   |
 | buttonColor         | Color           | no       | Customize button color                         |
+| buttonTextStyle     | TextStyle       | no       | Customize button text style                    |
 | activeBulletColor   | Color           | no       | Customize active bullet color                  |
 | inactiveBulletColor | Color           | no       | Customize inactive bullet color                |
 | backgroundProvider  | ImageProvider   | no       | Overboard background image provider            |
@@ -138,17 +140,25 @@ OR
 
 
 ### PageModel Widget
-| PROPERTY       | TYPE    | REQUIRED | DETAILS                                |
-| -------------- | ------- | -------- | -------------------------------------- |
-| color          | Color   | no       | Background color of the page           |
-| imageAssetPath | String  | no       | Image path from asset to show in page  |
-| title          | String  | no       | Title text of the page                 |
-| body           | String  | no       | Body text of the page                  |
-| child          | Widget  | no       | Custom widget to pass as image in page |
-| doAnimateChild | Boolean | yes      | To enable/disable child animation      |
-| doAnimateImage | Boolean | yes      | To enable/disable image animation      |
-| titleColor     | Color   | no       | Change color of title text             |
-| bodyColor      | Color   | no       | Change color of body text              |
+| PROPERTY       | TYPE      | REQUIRED | DETAILS                                |
+|----------------|-----------| -------- |----------------------------------------|
+| color          | Color     | no       | Background color of the page           |
+| imageAssetPath | String    | no       | Image path from asset to show in page  |
+| imageWidth     | double    | no       | Image width                            |
+| imageHeight    | double    | no       | Image height                           |
+| imageAssetPath | String    | no       | Image path from asset to show in page  |
+| title          | String    | no       | Title text of the page                 |
+| body           | String    | no       | Body text of the page                  |
+| titleStyle     | TextStyle | no       | Style of title text of the page        |
+| body           | String    | no       | Body text of the page                  |
+| bodyStyle      | TextStyle | no       | Style of body text of the page         |
+| bodyHeight     | double    | no       | Height of body text                    |
+| bodyPadding    | double    | no       | Padding of the body text               |
+| child          | Widget    | no       | Custom widget to pass as image in page |
+| doAnimateChild | Boolean   | yes      | To enable/disable child animation      |
+| doAnimateImage | Boolean   | yes      | To enable/disable image animation      |
+| titleColor     | Color     | no       | Change color of title text             |
+| bodyColor      | Color     | no       | Change color of body text              |
 
 
 ## Example

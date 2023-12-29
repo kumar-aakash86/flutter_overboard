@@ -6,7 +6,7 @@ Onboarding widget for flutter to create beautiful onboarding slides with minimal
 
 
 ## Demo   
- ![Example Gif](https://github.com/kumar-aakash86/flutter_overboard/blob/master/screenshots/example.gif)
+ ![Example Gif](https://github.com/kumar-aakash86/flutter_overboard/raw/master/screenshots/example.gif)
 
 
 ## Usage

@@ -1,11 +1,11 @@
 name: flutter_overboard
 description: Onboarding widget for flutter to create beautiful on-boarding slides with minimal code.
-version: 3.1.1
+version: 3.1.2
 maintainer: Aakash Kumar <kumar_aakash86@yahoo.in>
 homepage: https://github.com/kumar-aakash86/flutter_overboard
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: ">=2.12.0 <4.0.0"
 
 dependencies:
   flutter:

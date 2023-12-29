@@ -14,6 +14,9 @@ Add following command in your **pubspec.yaml** & install package
 
 `flutter_overboard:3.1.3`
 
+or run
+`flutter pub add flutter_overboard`
+
 _**Import in your dart page**_
 
 ```

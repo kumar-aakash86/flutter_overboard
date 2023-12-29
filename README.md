@@ -1,28 +1,27 @@
-# flutter_overboard  
-[![pub package](https://img.shields.io/badge/pub-v3.1.1-blue)](https://pub.dev/packages/flutter_overboard)  
+# flutter_overboard
 
+[![pub package](https://img.shields.io/badge/pub-v3.1.3-blue)](https://pub.dev/packages/flutter_overboard)
 
 Onboarding widget for flutter to create beautiful onboarding slides with minimal code.
 
+## Demo
 
-## Demo   
- ![Example Gif](https://github.com/kumar-aakash86/flutter_overboard/raw/master/screenshots/example.gif)
-
+![Example Gif](https://github.com/kumar-aakash86/flutter_overboard/raw/master/screenshots/example.gif)
 
 ## Usage
+
 Add following command in your **pubspec.yaml** & install package
 
-`flutter_overboard:2.0.1`
-    
-
+`flutter_overboard:3.1.3`
 
 _**Import in your dart page**_
+
 ```
 import 'package:flutter_overboard/flutter_overboard.dart';
-```  
-  
-  
-**_Create a pages array like_**   
+```
+
+**_Create a pages array like_**
+
 ```
     final pages = [
         new PageModel(
@@ -44,9 +43,10 @@ import 'package:flutter_overboard/flutter_overboard.dart';
             body: 'Connect with the people from different places',
             doAnimateImage: true),
     ];
-```   
-  
-**_You can also pass widgets as page model_** 
+```
+
+**_You can also pass widgets as page model_**
+
 ```
     PageModel.withChild(
         child: new Padding(
@@ -56,9 +56,9 @@ import 'package:flutter_overboard/flutter_overboard.dart';
         color: const Color(0xFF5886d6),
         doAnimateChild: true)
 ```
-  
-  
+
 **_Add follwing in you dart code widget_**
+
 ```
     OverBoard(
         pages: pages,
@@ -71,56 +71,63 @@ import 'package:flutter_overboard/flutter_overboard.dart';
         },
       ),
 ```
-  
+
 **That's it. You are done with the setup now try to run your app.**
 
-  
 **_To customize the circle reveal center point use (Overboard Widget)_**
+
 ```
     center: Offset(dx, dy);
 ```
-  
-  
+
 **_To customize the text of buttons (Overboard Widget)_**
+
 ```
     skipText: "Go Out",
     nextText: "Go Forward",
     finishText: "END",
 ```
-  
-  
+
 **_To customize the color of buttons (Overboard Widget)_**
+
 ```
     buttonColor: Colors.blue,
-``` 
+```
 
 **_To customize the color of bullets (Overboard Widget)_**
+
 ```
     activeBulletColor: Colors.white,
     inactiveBulletColor: Colors.white30,
 ```
 
 **_To customize the background of pages (Overboard Widget)_**
+
 ```
   backgroundProvider: NetworkImage('https://picsum.photos/720/1280')
 ```
+
 OR
+
 ```
   backgroundProvider: ImageProvider('assets/images/bg.jpg')
 ```
 
 **_To customize the color of page text (PageModel Widget)_**
+
 ```
     titleColor: Colors.blue,
     bodyColor: Colors.red,
 ```
 
 **_To add the scroll support using keyboard & mouse wheel (Overboard Widget)_**
+
 ```
     allowScroll: true,
-``` 
-     
+```
+
 ### Overboard Widget
+
 | PROPERTY            | TYPE            | REQUIRED | DETAILS                                        |
 | ------------------- | --------------- | -------- | ---------------------------------------------- |
 | pages               | List<PageModel> | yes      | List of pages to render on-boarding            |
@@ -136,8 +143,8 @@ OR
 | skipCallback        | VoidCallback    | no       | Skip button click callback                     |
 | finishCallback      | VoidCallback    | no       | Finish button click callback                   |
 
-
 ### PageModel Widget
+
 | PROPERTY       | TYPE    | REQUIRED | DETAILS                                |
 | -------------- | ------- | -------- | -------------------------------------- |
 | color          | Color   | no       | Background color of the page           |
@@ -150,8 +157,8 @@ OR
 | titleColor     | Color   | no       | Change color of title text             |
 | bodyColor      | Color   | no       | Change color of body text              |
 
-
 ## Example
+
 ```
 import 'package:flutter/material.dart';
 
@@ -236,6 +243,6 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 ```
 
-
 # LICENSE
+
 [MIT LICENSE](https://github.com/kumar-aakash86/flutter_overboard/blob/master/LICENSE.md)
